@@ -10,6 +10,7 @@ pipeline {
             steps {
                 sh '''
                     echo "running the tests ......."
+                    mvn test
                 '''
             }
         }
@@ -17,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                     echo "building the docker image ......."
-                    docker build -t "${DOCKER_IMAGE_NAME}" -f ./Dockerfile .
+                    docker build -t "${DOCKER_IMAGE_NAME}" .
                 '''
             }
         }
@@ -39,8 +40,8 @@ pipeline {
             steps {
                 sh '''
                     echo "deploying the application ........"
-                    docker rm -f bootcamp-first-app || true
-                    docker run -d -p 8081:8080 --name bootcamp-first-app "${DOCKER_IMAGE_NAME}":latest
+                    docker rm -f metadata_service || true
+                    docker run -d -p 9000:8080 --name metadata_service "${DOCKER_IMAGE_NAME}":latest
                 '''
             }
         }
