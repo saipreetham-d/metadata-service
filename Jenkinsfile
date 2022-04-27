@@ -40,8 +40,8 @@ pipeline {
             steps {
                 sh '''
                     echo "deploying the application ........"
-                    docker rm -f metadata_service || true
-                    docker run -d -p 9000:8080 --name metadata_service "${DOCKER_IMAGE_NAME}":latest
+                    docker rm -f  bootcamp-first-app || true
+                    docker run -d -p 9000:8080 --name bootcamp-first-app "${DOCKER_IMAGE_NAME}":latest
                 '''
             }
         }
